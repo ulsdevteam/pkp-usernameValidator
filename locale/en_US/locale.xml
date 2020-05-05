@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE locale SYSTEM "../../../../../lib/pkp/dtd/locale.dtd">
+
+<!--
+  * plugins/generic/usernameValidator/locale/en_US/locale.xml
+  *
+  * Copyright (c) University of Pittsburgh
+  * Distributed under the GNU GPL v2 or later. For full terms see the LICENSE file.
+  *
+  * Username Validator plugin localization strings
+  -->
+ 
+<locale name="en_US" full_name="U.S. English">
+
+	<!-- UsernameValidator -->
+	<message key="plugins.generic.usernameValidator.displayName">Username Validator Plugin</message>
+	<message key="plugins.generic.usernameValidator.description"><![CDATA[Integrate OJS with the Username Validator plugin that enables site admins to choose a reqular expression for usernames.]]></message>
+        <!-- UsernameValidator Settings Management -->
+        <message key="plugins.generic.usernameValidator.settings">Username Validator Settings</message>
+        <message key="plugins.generic.usernameValidator.settings.regexType">Choose the regular expression that needs to be applied to the username</message>
+        <message key="plugins.generic.usernameValidator.settings.regexType.email">Email</message>
+        <message key="plugins.generic.usernameValidator.settings.regexType.alphanumeric">Alpha-Numeric</message>
+        <message key="plugins.generic.usernameValidator.settings.userRegex">Or create your own regular expression</message>
+</locale>

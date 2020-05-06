@@ -98,7 +98,6 @@ class UsernameValidatorPlugin extends GenericPlugin{
 	 */
 	function checkUsername($hookname, $args) {
 		$form = $args[0];
-		$check = false;
 		$username = $form->getData('username');
 		$regexType = $this->getSetting(CONTEXT_SITE, 'regexType');
 		$userRegex = $this->getSetting(CONTEXT_SITE, 'userParseRegex');
@@ -106,28 +105,24 @@ class UsernameValidatorPlugin extends GenericPlugin{
 			if (empty($userRegex) || $userRegex == 'NA') {
 				switch ($regexType) {
 					default:
-						$check = preg_match('/^[a-zA-Z]+[a-zA-Z0-9._]+$/', $username);
-						if (!$check) {
-							return new JSONMessage(true, __('plugins.generic.usernameValidator.checks.default'));
+						if (!preg_match('/^[a-zA-Z]+[a-zA-Z0-9._]+$/', $username)) {
+							$form->addError('username', __('plugins.generic.usernameValidator.checks.default'));
 						}
 					case 'Email':
-						$check = filter_var($username, FILTER_VALIDATE_EMAIL);
-						if (!$check) {
-							return new JSONMessage(true, __('plugins.generic.usernameValidator.checks.email'));
+						if (!filter_var($username, FILTER_VALIDATE_EMAIL)) {
+							$form->addError('username', __('plugins.generic.usernameValidator.checks.email'));
 						}
 					case 'Alpha-Numeric':
-						$check = preg_match('/^[a-zA-Z]+[a-zA-Z0-9]+$/', $username);
-						if (!$check) {
-							return new JSONMessage(true, __('plugins.generic.usernameValidator.checks.alphaNum'));
+						if (!preg_match('/^[a-zA-Z]+[a-zA-Z0-9]+$/', $username)) {
+							$form->addError('username', __('plugins.generic.usernameValidator.checks.alphaNum'));
 						}
 				}
 			} else {
-				$check = preg_match($userRegex, $username);
-				if (!$check) {
-					return new JSONMessage(true, __('plugins.generic.usernameValidator.checks.userRegex'));
+				if (!preg_match($userRegex, $username)) {
+					$form->addError('username', __('plugins.generic.usernameValidator.checks.userRegex'));
 				}
 			}
 		}
-		return new JSONMessage((boolean)!check);
+		return false;
 	}
 }

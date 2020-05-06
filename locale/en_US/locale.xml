@@ -21,4 +21,5 @@
         <message key="plugins.generic.usernameValidator.settings.regexType.email">Email</message>
         <message key="plugins.generic.usernameValidator.settings.regexType.alphanumeric">Alpha-Numeric</message>
         <message key="plugins.generic.usernameValidator.settings.userRegex">Or create your own regular expression</message>
+        <message key="plugins.generic.usernameValidator.settings.invalidRegex">The Regex entered is invalid!</message>
 </locale>

@@ -21,7 +21,7 @@
 
 	{fbvFormArea id="usernameValidatorSettings" title="plugins.generic.usernameValidator.settings"}
 		{fbvFormSection for="regexType" description="plugins.generic.usernameValidator.settings.regexType"}
-			{fbvElement type="select" id="regexType" from=$regexTypes selected=$regexType size=$fbvStyles.size.SMALL}
+			{fbvElement type="select" id="regexType" from=$regexTypes selected=$regexTypeSelected size=$fbvStyles.size.SMALL}
 		{/fbvFormSection}
 		{fbvFormSection description="plugins.generic.usernameValidator.settings.userRegex"}
 			{fbvElement type="text" id="userParseRegex" value=$userParseRegex}

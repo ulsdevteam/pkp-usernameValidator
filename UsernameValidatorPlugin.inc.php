@@ -21,6 +21,10 @@ class UsernameValidatorPlugin extends GenericPlugin{
 		$success = parent::register($category, $path, $mainContextId);
 		if (!Config::getVar('general', 'installed') || defined('RUNNING_UPGRADE')) return true;
 		if ($success && $this->getEnabled()) {
+			HookRegistry::register('registrationform::validate', array(&$this, 'checkUsername'));
+			HookRegistry::register('installform::validate', array(&$this, 'checkUsername'));
+			HookRegistry::register('userdetailsform::validate', array(&$this, 'checkUsername'));
+			HookRegistry::register('createreviewerform::validate', array(&$this, 'checkUsername'));
 			}
 		return $success;
 	}
@@ -60,6 +64,9 @@ class UsernameValidatorPlugin extends GenericPlugin{
 				if ($request->getUserVar('save')) {
 					$form->readInputData();
 					$form->execute();
+					if(empty($this->getSetting(CONTEXT_SITE, 'userParseRegex'))) {
+						return new JSONMessage(false, __('plugins.generic.usernameValidator.settings.invalidRegex'));
+					}
 					return new JSONMessage(true);
 				} else {
 					$form->initData();
@@ -68,7 +75,6 @@ class UsernameValidatorPlugin extends GenericPlugin{
 		}
 		return parent::manage($args, $request);
 	}
-
 
 	/**
 	 * Get the display name of this plugin.
@@ -84,5 +90,32 @@ class UsernameValidatorPlugin extends GenericPlugin{
 	 */
 	function getDescription() {
 		return __('plugins.generic.usernameValidator.description');
+	}
+
+	/**
+	 * Hook Callback: check the username in a form matches a regex specified
+	 * @see Form::validate()
+	 */
+	function checkUsername($hookname, $args) {
+		$form = $args[0];
+		$check = false;
+		$username = $form->getData('username');
+		$regexType = $this->getSetting(CONTEXT_SITE, 'regexType');
+		$userRegex = $this->getSetting(CONTEXT_SITE, 'userParseRegex');
+		if (!is_null($username)) {
+			if (empty($userRegex) || $userRegex == 'NA') {
+				switch ($regexType) {
+					case 'Email':
+						$check = filter_var($username, FILTER_VALIDATE_EMAIL);
+					case 'Alpha-Numeric':
+						$check = preg_match('/[^a-z0-9]/i', $username);
+					default:
+						$check = preg_match('/[^a-z_\-0-9]/i', $username);
+				}
+			} else {
+				$check = preg_match($userRegex, $username);
+			}
+		}
+		return !check;
 	}
 }

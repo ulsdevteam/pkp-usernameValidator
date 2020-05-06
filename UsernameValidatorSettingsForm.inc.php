@@ -32,7 +32,13 @@ class UsernameValidatorSettingsForm extends Form{
 	function execute() {
 		$plugin = $this->_plugin;
 		$plugin->updateSetting(CONTEXT_SITE, 'regexType', $this->getData('regexType'));
-		$plugin->updateSetting(CONTEXT_SITE, 'userParseRegex', $this->getData('userParseRegex'));
+		if (preg_match($this->getData('userParseRegex'), NULL) === false && !empty($this->getData('userParseRegex'))) {
+			$plugin->updateSetting(CONTEXT_SITE, 'userParseRegex', '');
+		} elseif (empty($this->getData('userParseRegex'))) {
+			$plugin->updateSetting(CONTEXT_SITE, 'userParseRegex', 'NA');
+		} else {
+			$plugin->updateSetting(CONTEXT_SITE, 'userParseRegex', $this->getData('userParseRegex'));
+		}
 	}
 	
 	/**
@@ -40,8 +46,8 @@ class UsernameValidatorSettingsForm extends Form{
 	 */
 	function initData() {
 		$plugin = $this->_plugin;
-		$this->setData('regexType', $plugin->getSetting(CONTEXT_SITE, 'regexType'));
-		$this->setData('userParseRegex', $plugin->getSetting(CONTEXT_SITE, 'userParseRegex'));
+		$this->setData('', $plugin->getSetting(CONTEXT_SITE, 'regexType'));
+		$this->setData('', $plugin->getSetting(CONTEXT_SITE, 'userParseRegex'));
 	}
 	
 	/**
@@ -60,6 +66,7 @@ class UsernameValidatorSettingsForm extends Form{
 	function fetch($request, $template = null, $display = false) {
 		$plugin = $this->_plugin;
 		$templateMgr = TemplateManager::getManager($request);
+		$regexTypeSelected = $plugin->getSetting(CONTEXT_SITE, 'regexType');
 		$regexTypes = array(
 			'Email' => __('plugins.generic.usernameValidator.settings.regexType.email'),
 			'Alpha-Numeric' => __('plugins.generic.usernameValidator.settings.regexType.alphanumeric')
@@ -67,7 +74,12 @@ class UsernameValidatorSettingsForm extends Form{
 		$userParseRegex = $plugin->getSetting(CONTEXT_SITE, 'userParseRegex');
 		$templateMgr->assign('regexTypes', $regexTypes);
 		$templateMgr->assign('pluginName', $this->_plugin->getName());
-		$templateMgr->assign('userParseRegex', $userParseRegex);
+		$templateMgr->assign('regexTypeSelected', $regexTypeSelected);
+		if ($userParseRegex == 'NA') {
+			$templateMgr->assign('userParseRegex', '');
+		} else {
+			$templateMgr->assign('userParseRegex', $userParseRegex);
+		}
 		return parent::fetch($request);
 	}
 }

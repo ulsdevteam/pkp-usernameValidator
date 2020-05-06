@@ -68,6 +68,7 @@ class UsernameValidatorSettingsForm extends Form{
 		$templateMgr = TemplateManager::getManager($request);
 		$regexTypeSelected = $plugin->getSetting(CONTEXT_SITE, 'regexType');
 		$regexTypes = array(
+			'Default' => __('plugins.generic.usernameValidator.settings.regexType.default'),
 			'Email' => __('plugins.generic.usernameValidator.settings.regexType.email'),
 			'Alpha-Numeric' => __('plugins.generic.usernameValidator.settings.regexType.alphanumeric')
 			);

@@ -15,11 +15,17 @@
 	<!-- UsernameValidator -->
 	<message key="plugins.generic.usernameValidator.displayName">Username Validator Plugin</message>
 	<message key="plugins.generic.usernameValidator.description"><![CDATA[Integrate OJS with the Username Validator plugin that enables site admins to choose a reqular expression for usernames.]]></message>
-        <!-- UsernameValidator Settings Management -->
-        <message key="plugins.generic.usernameValidator.settings">Username Validator Settings</message>
-        <message key="plugins.generic.usernameValidator.settings.regexType">Choose the regular expression that needs to be applied to the username</message>
-        <message key="plugins.generic.usernameValidator.settings.regexType.email">Email</message>
-        <message key="plugins.generic.usernameValidator.settings.regexType.alphanumeric">Alpha-Numeric</message>
-        <message key="plugins.generic.usernameValidator.settings.userRegex">Or create your own regular expression</message>
-        <message key="plugins.generic.usernameValidator.settings.invalidRegex">The Regex entered is invalid!</message>
+	<!-- UsernameValidator Settings Management -->
+	<message key="plugins.generic.usernameValidator.settings">Username Validator Settings</message>
+	<message key="plugins.generic.usernameValidator.settings.regexType">Choose the regular expression that needs to be applied to the username (Default: Alpha-Numeric with . and _)</message>
+        <message key="plugins.generic.usernameValidator.settings.regexType.default">Default</message>
+	<message key="plugins.generic.usernameValidator.settings.regexType.email">Email</message>
+	<message key="plugins.generic.usernameValidator.settings.regexType.alphanumeric">Alpha-Numeric</message>
+	<message key="plugins.generic.usernameValidator.settings.userRegex">Or create your own regular expression</message>
+	<message key="plugins.generic.usernameValidator.settings.invalidRegex">The Regex entered is invalid!</message>
+	<!-- UsernameValidator Error Checkking -->
+	<message key="plugins.generic.usernameValidator.checks.default">The username can only contain alpha-numeric characters (with . and _)</message>
+	<message key="plugins.generic.usernameValidator.checks.email">The username can only be in the form of an email (xyz@abc.com)</message>
+	<message key="plugins.generic.usernameValidator.checks.alphaNum">The username can only contain alpha-numeric characters</message>
+	<message key="plugins.generic.usernameValidator.checks.userRegex">The username is invalid!</message>
 </locale>

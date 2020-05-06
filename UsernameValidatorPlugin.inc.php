@@ -105,17 +105,29 @@ class UsernameValidatorPlugin extends GenericPlugin{
 		if (!is_null($username)) {
 			if (empty($userRegex) || $userRegex == 'NA') {
 				switch ($regexType) {
+					default:
+						$check = preg_match('/^[a-zA-Z]+[a-zA-Z0-9._]+$/', $username);
+						if (!$check) {
+							return new JSONMessage(true, __('plugins.generic.usernameValidator.checks.default'));
+						}
 					case 'Email':
 						$check = filter_var($username, FILTER_VALIDATE_EMAIL);
+						if (!$check) {
+							return new JSONMessage(true, __('plugins.generic.usernameValidator.checks.email'));
+						}
 					case 'Alpha-Numeric':
-						$check = preg_match('/[^a-z0-9]/i', $username);
-					default:
-						$check = preg_match('/[^a-z_\-0-9]/i', $username);
+						$check = preg_match('/^[a-zA-Z]+[a-zA-Z0-9]+$/', $username);
+						if (!$check) {
+							return new JSONMessage(true, __('plugins.generic.usernameValidator.checks.alphaNum'));
+						}
 				}
 			} else {
 				$check = preg_match($userRegex, $username);
+				if (!$check) {
+					return new JSONMessage(true, __('plugins.generic.usernameValidator.checks.userRegex'));
+				}
 			}
 		}
-		return !check;
+		return new JSONMessage((boolean)!check);
 	}
 }

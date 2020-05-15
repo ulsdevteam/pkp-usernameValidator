@@ -51,9 +51,6 @@ class UsernameValidatorPlugin extends GenericPlugin{
 	 * @copydoc Plugin::manage()
 	 */
 	function manage($args, $request) {
-		$user =& Request::getUser();
-		import('classes.notification.NotificationManager');
-		$notificationManager = new NotificationManager();
 		switch ($request->getUserVar('verb')) {
 			case 'settings':
 				$templateMgr =& TemplateManager::getManager();

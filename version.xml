@@ -12,7 +12,7 @@
 <version>
 	<application>usernameValidator</application>
 	<type>plugins.generic</type>
-	<release>1.2.2.1</release>
+	<release>1.0.0.0</release>
 	<date>2020-05-05</date>
 	<lazy-load>1</lazy-load>
 	<class>UsernameValidatorPlugin</class>

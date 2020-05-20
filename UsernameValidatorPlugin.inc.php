@@ -74,6 +74,15 @@ class UsernameValidatorPlugin extends GenericPlugin{
 	}
 
 	/**
+	 * Site-wide plugins should override this function to return true.
+	 *
+	 * @return boolean
+	 */
+	function isSitePlugin() {
+		return true;
+	}
+
+	/**
 	 * Get the display name of this plugin.
 	 * @return String
 	 */

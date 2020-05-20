@@ -8,7 +8,7 @@ Plugin for OJS, validates the username with user specified regex or in-built reg
 
 ## Configuration
 
-Install this as a "generic" plugin in OJS.  The preferred installation method is through the Plugin Gallery.  To install manually via the filesystem, extract the contents of this archive to a "usernameValidator" directory under "plugins/generic" in your OJS root.  To install via Git submodule, target that same directory path: `git submodule add https://github.com/shanu17/pkp-usernameValidator plugins/generic/usernameValidator` and `git submodule update --init --recursive plugins/generic/usernameValidator`. Run the installation script to register this plugin, e.g.: php lib/pkp/tools/installPluginVersion.php plugins/generic/clamav/version.xml.
+Install this as a "generic" plugin in OJS.  The preferred installation method is through the Plugin Gallery.  To install manually via the filesystem, extract the contents of this archive to a "usernameValidator" directory under "plugins/generic" in your OJS root.  To install via Git submodule, target that same directory path: `git submodule add https://github.com/shanu17/pkp-usernameValidator plugins/generic/usernameValidator` and `git submodule update --init --recursive plugins/generic/usernameValidator`. Run the installation script to register this plugin, e.g.: `php lib/pkp/tools/installPluginVersion.php plugins/generic/clamav/version.xml`.
 
 Login as a Site Administrator and navigate to any context.  Enable the plugin via Login -> Settings -> Website -> Plugins -> Username Validator -> Enable.
 

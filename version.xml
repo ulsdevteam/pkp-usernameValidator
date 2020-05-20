@@ -14,6 +14,7 @@
 	<type>plugins.generic</type>
 	<release>1.0.0.0</release>
 	<date>2020-05-05</date>
+	<sitewide>1</sitewide>
 	<lazy-load>1</lazy-load>
 	<class>UsernameValidatorPlugin</class>
 </version>
